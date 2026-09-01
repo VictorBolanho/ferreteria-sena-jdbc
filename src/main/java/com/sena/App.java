@@ -1,23 +1,29 @@
 package com.sena;
 
-import com.sena.conexion.ConexionBD;
-import java.sql.Connection;
+import com.sena.dao.ProductoDAO;
+import com.sena.modelo.Producto;
+
 import java.sql.SQLException;
+import java.util.List;
 
 public class App {
 
     public static void main(String[] args) {
-        try (Connection conexion = ConexionBD.obtenerConexion()) {
+        ProductoDAO productoDAO = new ProductoDAO();
 
-            if (conexion.isValid(2)) {
-                System.out.println(
-                        "Conexión exitosa con la base de datos ferreteria_sena."
-                );
+        try {
+            List<Producto> productos = productoDAO.listar();
+
+            System.out.println("PRODUCTOS REGISTRADOS");
+            System.out.println("---------------------");
+
+            for (Producto producto : productos) {
+                System.out.println(producto);
             }
 
         } catch (SQLException excepcion) {
             System.err.println(
-                    "Error al conectar con MySQL: "
+                    "Error al consultar productos: "
                             + excepcion.getMessage()
             );
         }
