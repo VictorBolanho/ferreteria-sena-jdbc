@@ -24,10 +24,8 @@ public class ProductoDAO {
 
         try (
                 Connection conexion = ConexionBD.obtenerConexion();
-                PreparedStatement sentencia =
-                        conexion.prepareStatement(sql);
-                ResultSet resultado = sentencia.executeQuery()
-        ) {
+                PreparedStatement sentencia = conexion.prepareStatement(sql);
+                ResultSet resultado = sentencia.executeQuery()) {
             while (resultado.next()) {
                 Producto producto = new Producto(
                         resultado.getInt("id"),
@@ -36,8 +34,7 @@ public class ProductoDAO {
                         resultado.getBigDecimal("precio"),
                         resultado.getInt("cantidad"),
                         resultado.getTimestamp("fecha_registro")
-                                .toLocalDateTime()
-                );
+                                .toLocalDateTime());
 
                 productos.add(producto);
             }
@@ -45,4 +42,29 @@ public class ProductoDAO {
 
         return productos;
     }
+
+    public boolean insertar(Producto producto) throws SQLException {
+        String sql = """
+                INSERT INTO productos (
+                    nombre,
+                    descripcion,
+                    precio,
+                    cantidad
+                )
+                VALUES (?, ?, ?, ?)
+                """;
+
+        try (
+                Connection conexion = ConexionBD.obtenerConexion();
+                PreparedStatement sentencia = conexion.prepareStatement(sql)) {
+            sentencia.setString(1, producto.getNombre());
+            sentencia.setString(2, producto.getDescripcion());
+            sentencia.setBigDecimal(3, producto.getPrecio());
+            sentencia.setInt(4, producto.getCantidad());
+
+            int filasAfectadas = sentencia.executeUpdate();
+            return filasAfectadas > 0;
+        }
+    }
+
 }
