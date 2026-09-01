@@ -67,4 +67,28 @@ public class ProductoDAO {
         }
     }
 
+    public boolean actualizar(Producto producto) throws SQLException {
+        String sql = """
+                UPDATE productos
+                SET nombre = ?,
+                    descripcion = ?,
+                    precio = ?,
+                    cantidad = ?
+                WHERE id = ?
+                """;
+
+        try (
+                Connection conexion = ConexionBD.obtenerConexion();
+                PreparedStatement sentencia = conexion.prepareStatement(sql)) {
+            sentencia.setString(1, producto.getNombre());
+            sentencia.setString(2, producto.getDescripcion());
+            sentencia.setBigDecimal(3, producto.getPrecio());
+            sentencia.setInt(4, producto.getCantidad());
+            sentencia.setInt(5, producto.getId());
+
+            int filasAfectadas = sentencia.executeUpdate();
+            return filasAfectadas > 0;
+        }
+    }
+
 }
