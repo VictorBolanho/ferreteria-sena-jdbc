@@ -91,4 +91,17 @@ public class ProductoDAO {
         }
     }
 
+    public boolean eliminar(int id ) throws SQLException {
+        String sql = "DELETE FROM productos WHERE id = ?";
+        
+        try ( 
+            Connection conexion  = ConexionBD.obtenerConexion();
+            PreparedStatement sentencia = conexion.prepareStatement(sql);
+        ){
+            sentencia.setInt(1, id);
+            int filasAfectadas = sentencia.executeUpdate();
+            return filasAfectadas > 0;
+        }
+
+    }
 }
