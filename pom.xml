@@ -45,6 +45,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- JSTL para utilizar etiquetas y ciclos en las páginas JSP -->
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
