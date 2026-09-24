@@ -1,10 +1,26 @@
-EVIDENCIA GA7-220501096-AA2-EV01
-Codificación de módulos del software
+EVIDENCIA GA7-220501096-AA2-EV02
+Módulos de software codificados y probados
 
-Aprendiz: Victor Bolaño
+Aprendiz:
+Víctor José Bolaño Gutiérrez
+
+Ficha:
+3186695
+
+Programa:
+Análisis y Desarrollo de Software - ADSO
+
+Instructor:
+LUIS FERNANDO NARVAEZ BRAVO
 
 Repositorio:
 https://github.com/VictorBolanho/ferreteria-sena-jdbc
 
 Rama principal:
 master
+
+Descripción:
+Aplicación web para la gestión de productos de una ferretería,
+desarrollada con Java, Servlets, JSP, JSTL, JDBC y MySQL.
+Incluye métodos GET y POST, formularios HTML, pruebas unitarias
+y control de versiones con Git y GitHub.
